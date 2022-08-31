@@ -1,0 +1,19 @@
+<package format="2">
+  <name>ardupilot_gazebo</name>
+  <version>1.2.3</version>
+  <description>
+    This package provides foo capability.
+  </description>
+  <maintainer email="ivana@osrf.org">Ivana Bildbotz</maintainer>
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <export>
+    <build_type>cmake</build_type>
+    <gazebo_ros gazebo_media_path="${prefix}/models"/>
+    <gazebo_ros gazebo_plugin_path="${prefix}/../../devel/lib" />
+    <gazebo_ros gazebo_resource_path="${prefix}/models" />
+    <gazebo_ros gazebo_model_path="${prefix}/models" />
+  </export>
+</package>
+

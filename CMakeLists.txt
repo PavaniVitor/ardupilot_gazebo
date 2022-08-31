@@ -140,22 +140,35 @@ set (plugins_single_header
         )
 
 add_library(ArduCopterIRLockPlugin SHARED src/ArduCopterIRLockPlugin.cc)
-target_link_libraries(ArduCopterIRLockPlugin ${GAZEBO_LIBRARIES})
+target_link_libraries(ArduCopterIRLockPlugin ${CMAKE_INSTALL_LIB_DIR})
 
 add_library(ArduPilotPlugin SHARED src/ArduPilotPlugin.cc)
 target_link_libraries(ArduPilotPlugin ${GAZEBO_LIBRARIES})
 
+# if("${GAZEBO_VERSION}" VERSION_LESS "8.0")
+#     add_library(GimbalSmall2dPlugin SHARED src/GimbalSmall2dPlugin.cc)
+#     target_link_libraries(GimbalSmall2dPlugin ${CMAKE_INSTALL_LIB_DIR})
+#     install(TARGETS GimbalSmall2dPlugin DESTINATION ${CMAKE_INSTALL_LIB_DIR})
+# endif()
+
+# install(TARGETS ArduCopterIRLockPlugin DESTINATION ${CMAKE_INSTALL_LIB_DIR})
+# install(TARGETS ArduPilotPlugin DESTINATION ${GAZEBO_PLUGIN_PATH})
+
+# install(DIRECTORY models DESTINATION ${CMAKE_INSTALL_LIB_DIR}/..)
+# install(DIRECTORY worlds DESTINATION ${CMAKE_INSTALL_LIB_DIR}/..)
+
 if("${GAZEBO_VERSION}" VERSION_LESS "8.0")
     add_library(GimbalSmall2dPlugin SHARED src/GimbalSmall2dPlugin.cc)
-    target_link_libraries(GimbalSmall2dPlugin ${GAZEBO_LIBRARIES})
-    install(TARGETS GimbalSmall2dPlugin DESTINATION ${GAZEBO_PLUGIN_PATH})
+    target_link_libraries(GimbalSmall2dPlugin ${CATKIN_PACKAGE_LIB_DESTINATION})
+    install(TARGETS GimbalSmall2dPlugin DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
 endif()
 
-install(TARGETS ArduCopterIRLockPlugin DESTINATION ${GAZEBO_PLUGIN_PATH})
-install(TARGETS ArduPilotPlugin DESTINATION ${GAZEBO_PLUGIN_PATH})
+install(TARGETS ArduCopterIRLockPlugin DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
+install(TARGETS ArduPilotPlugin DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
 
-install(DIRECTORY models DESTINATION ${GAZEBO_MODEL_PATH}/..)
-install(DIRECTORY worlds DESTINATION ${GAZEBO_MODEL_PATH}/..)
+# install(DIRECTORY models DESTINATION ${CMAKE_INSTALL_LIB_DIR})
+# install(DIRECTORY worlds DESTINATION ${CMAKE_INSTALL_LIB_DIR})
+
 
 # uninstall target
 if(NOT TARGET uninstall)
